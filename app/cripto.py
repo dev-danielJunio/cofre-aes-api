@@ -52,6 +52,11 @@ def decifrar(chave: bytes, nonce_b64: str, cripto_b64: str,
     return resultado.decode("utf-8")
 
 FRASE_VERIFICADORA = "cofre-ok"
+
+def aad_segredo(cofre_id: str, segredo_id: str) -> bytes:
+    """Vincula o conteúdo cifrado ao cofre e ao próprio segredo."""
+    return f"{cofre_id}|{segredo_id}".encode("utf-8")
+ 
  
 def criar_verificador(chave: bytes,
                       cofre_id: str) -> tuple[str, str, str]:
